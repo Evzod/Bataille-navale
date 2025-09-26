@@ -1,5 +1,5 @@
-import javax.swing.*;
-/*import javax.awt.*;
+/*import javax.swing.*;
+import javax.awt.*;
 import javax.awt.event.*;
 */
 public class GameMain {
