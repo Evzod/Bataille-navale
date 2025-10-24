@@ -5,6 +5,7 @@ import java.awt.*;
 public class Menu extends JDialog {
 	//Variables
 	int bAppuye; //1 = pvp, 2 = pve, 3 = quitter
+	int dif = 0; //1 = facile, 2 = moyen, 3 = difficile
 
 	//Constructeur
 	public Menu(JFrame f, int mode) {
@@ -42,7 +43,8 @@ public class Menu extends JDialog {
 				//Ouvre le menu de choix de difficulté
 				Menu menuDif = new Menu(f, 1);
 				menuDif.setVisible(true);
-				bAppuye = 20 + menuDif.getbAppuye(); //21 = facile, 22 = moyen, 23 = difficile
+				bAppuye = 2;
+				dif = menuDif.getbAppuye(); //1 = facile, 2 = moyen, 3 = difficile
 				dispose();
 			});
 			//Création du titre et mise en forme
@@ -90,6 +92,10 @@ public class Menu extends JDialog {
 
 	public int getbAppuye() {
 		return bAppuye;
+	}
+
+	public int getDif() {
+		return dif;
 	}
 
 }
