@@ -5,7 +5,7 @@ public class Partie {
 
 	public Partie(JFrame f, int mode, int difficulte) {
 		//Paramétrage de la fenêtre
-		Jpanel wPanel1 = new JPanel();
+		JPanel wPanel1 = new JPanel();
 		JPanel panelGrille1 = new JPanel();
 		JPanel panelGrille2 = new JPanel();
 		panelGrille1.setPreferredSize(new Dimension(400, 400));
@@ -18,4 +18,3 @@ public class Partie {
 	}
 
 }
-
