@@ -15,9 +15,6 @@ public class GameMain {
 		//Traitement du choix du menu
 		Partie partie = new Partie(f, menu1.getbAppuye(), menu1.getDif());
 		f.setVisible(true);
-		//Temporaire
-		System.out.println(menu1.getbAppuye());
-		System.out.println(menu1.getDif());
 	}
 
 }

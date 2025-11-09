@@ -3,14 +3,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class Menu extends JDialog {
-	//Variables
 	int bAppuye; //1 = pvp, 2 = pve, 3 = quitter
 	int dif = 0; //1 = facile, 2 = moyen, 3 = difficile
 
-	//Constructeur
 	public Menu(JFrame f, int mode) {
 		//Lignes communes aux deux constructeurs
 		super(f, null, true);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//Création des panels communs
 		JPanel panelB = new JPanel();
 		JPanel panel = new JPanel();
@@ -37,6 +36,7 @@ public class Menu extends JDialog {
 			});
 			b3.addActionListener(e -> {
 				bAppuye = 3;
+				System.exit(0);
 				dispose();
 			});
 			b2.addActionListener(e -> {
@@ -53,7 +53,7 @@ public class Menu extends JDialog {
 			titre.setBorder(new EmptyBorder(100, 0, 100, 0));
 			add(titre, BorderLayout.NORTH);
 			add(panel, BorderLayout.CENTER);
-		} else/* if (mode==1)*/ {
+		} else if (mode==1) {//Sous-menu choix difficulté
 			//Actions sur la fenêtre
 			setTitle("Bataille navale -- Choix de la Difficulté");
 			setSize(700, 400);
