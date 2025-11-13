@@ -10,13 +10,22 @@ public class Joueur {
 
     public Joueur (int mode, int dif, JPanel p) {
         p.setBackground(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
+        JLabel image = new JLabel(new ImageIcon("img/0.png"));
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 0;
         JPanel panelGrille = new JPanel();
 		panelGrille.setPreferredSize(new Dimension(400, 400));
-        p.add(panelGrille);
+        p.add(panelGrille, c);
+        p.add(image, c);
         grille = new Grille(panelGrille);
-        etatCases[5][2] = 1;
-        etatCases[5][3] = 2;
-        etatCases[5][4] = 1;
+        etatCases[2][5] = 4110;
+        etatCases[3][5] = 4120;
+        etatCases[4][5] = 4130;
+        etatCases[5][5] = 4140;
+        etatCases[2][3] = 3110;
+        etatCases[3][3] = 3120;
+        etatCases[4][3] = 3130;
         grille.update(etatCases);
     }
 
