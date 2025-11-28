@@ -16,9 +16,13 @@ public class Partie {
 		f.add(panelj1, BorderLayout.WEST);
 		f.add(panelj2, BorderLayout.EAST);
 		//Démarrage de la partie;
-		Joueur j1 = new Joueur(1, 0, panelj1);
-		Joueur j2 = new Joueur(mode, difficulte, panelj2);
-		j1.placerBateaux();
-		j2.placerBateaux();
+		j1 = new Joueur(1, 0, panelj1);
+		j2 = new Joueur(mode, difficulte, panelj2);
 	}
+
+	public void placerBateaux() {
+		j1.placerBateaux();
+		//j2.placerBateaux();
+	}
+
 }

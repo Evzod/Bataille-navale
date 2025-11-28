@@ -1,6 +1,5 @@
 import javax.swing.*;
 
-
 public class GameMain {
 	public static void main (String[] args) {
 		//Création de la fenêtre principale
@@ -15,6 +14,15 @@ public class GameMain {
 		//Traitement du choix du menu
 		Partie partie = new Partie(f, menu1.getbAppuye(), menu1.getDif());
 		f.setVisible(true);
+		partie.placerBateaux();
+	}
+
+	public static void pause(int ms) {
+		try {
+			Thread.sleep(ms);
+		} catch(InterruptedException ex) {
+			System.out.println("faut pas faire ça");
+		}
 	}
 
 }
