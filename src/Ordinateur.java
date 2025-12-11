@@ -1,5 +1,7 @@
-public class Ordinateur extends Input {
+import java.awt.*;
+
+public class Ordinateur {
     public Ordinateur() {
-        System.out.println("constructeur ordinateur");
+        Robot ordi = new Robot();
     }
 }

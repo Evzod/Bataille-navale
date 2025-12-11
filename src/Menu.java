@@ -6,13 +6,25 @@ public class Menu extends JDialog {
 	int bAppuye; //1 = pvp, 2 = pve, 3 = quitter
 	int dif = 0; //1 = facile, 2 = moyen, 3 = difficile
 
+	public Menu(JFrame f, String joueur) {
+		super(f, null, true);
+		setTitle("Bataille navale -- Choix du nom du joueur");
+		setSize(700, 400);
+		setLocationRelativeTo(f);
+		JLabel titre = new JLabel("Veuillez rentrer le nom du joueur", 0);
+		titre.setFont(new Font("Arial", Font.BOLD, 20));
+		titre.setBorder(new EmptyBorder(50, 0, 50, 0));
+		add(titre, BorderLayout.NORTH);
+		JTextField entreeNom = new JTextField("Joueur");
+		entreeNom.setSize(100, 100);
+		JPanel panelB = new JPanel(new GridLayout(2, 1, 0, 50));
+		
+	}
+
 	public Menu(JFrame f, int mode) {
 		//Lignes communes aux deux constructeurs
 		super(f, null, true);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		//Création des panels communs
-		JPanel panelB = new JPanel();
-		JPanel panel = new JPanel();
 		//Constructeur différent selon le mode (0 = menu principal, 1 = choix difficulté)
 		if (mode==0) {
 			//Actions sur la fenêtre
@@ -20,6 +32,8 @@ public class Menu extends JDialog {
 			setSize(1000, 600);
 			setLocationRelativeTo(f);
 			//Création des boutons
+			JPanel panelB = new JPanel();
+			JPanel panel = new JPanel();
 			JButton b1 = new JButton ("Joueur vs Joueur");
 			JButton b2 = new JButton ("Joueur vs Ordinateur");
 			JButton b3 = new JButton ("Quitter");
@@ -48,7 +62,7 @@ public class Menu extends JDialog {
 				dispose();
 			});
 			//Création du titre et mise en forme
-			JLabel titre = new JLabel("Bataille Navale", JLabel.CENTER);
+			JLabel titre = new JLabel("Bataille Navale", 0);
 			titre.setFont(new Font("Arial", Font.BOLD, 30));
 			titre.setBorder(new EmptyBorder(100, 0, 100, 0));
 			add(titre, BorderLayout.NORTH);
@@ -59,6 +73,8 @@ public class Menu extends JDialog {
 			setSize(700, 400);
 			setLocationRelativeTo(f);
 			//Création des boutons
+			JPanel panelB = new JPanel();
+			JPanel panel = new JPanel();
 			JButton b1 = new JButton ("Facile");
 			JButton b2 = new JButton ("Moyen");
 			JButton b3 = new JButton ("Difficile");
@@ -82,13 +98,13 @@ public class Menu extends JDialog {
 				dispose();
 			});
 			//Création du titre et mise en forme
-			JLabel titre = new JLabel("Choix de la difficulté", JLabel.CENTER);
+			JLabel titre = new JLabel("Choix de la difficulté", 0);
 			titre.setFont(new Font("Arial", Font.BOLD, 20));
 			titre.setBorder(new EmptyBorder(50, 0, 50, 0));
 			add(titre, BorderLayout.NORTH);
 			add(panel, BorderLayout.CENTER);
 		}
-		}
+	}
 
 	public int getbAppuye() {
 		return bAppuye;
@@ -96,6 +112,10 @@ public class Menu extends JDialog {
 
 	public int getDif() {
 		return dif;
+	}
+
+	public String getNom(String joueur) {
+		return nom;
 	}
 
 }

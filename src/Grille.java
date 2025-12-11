@@ -26,10 +26,27 @@ public class Grille {
             for (int y = 0; y <= 9; y++) {
                 if (matrice[x][y] >= 1000) {
                     cases[x][y].setIcon(new ImageIcon("img/"+Integer.toString(matrice[x][y])+".png"));
-                } else if (matrice[x][y] != 0) {
-                    cases[x][y].setIcon(new ImageIcon("img/rouge.png"));
                 } else {
-                    cases[x][y].setIcon(null);
+                    switch (matrice[x][y]) {
+                        case -1 : //Pour le placement non valide
+                            cases[x][y].setIcon(new ImageIcon("img/rouge.png"));
+                            break;
+                        case 1 : //Premier stade d'explosion
+                            cases[x][y].setIcon(new ImageIcon("img/explosion1.png"));
+                            break;
+                        case 2 : //Deuxième stade d'explosion
+                            cases[x][y].setIcon(new ImageIcon("img/explosion2.png"));
+                            break;
+                        case 3 : //Overlay gris sur la grille adverse
+                            cases[x][y].setIcon(new ImageIcon("img/gris.png"));
+                            break;
+                        case 4 : //PLOUF!!!
+                            cases[x][y].setIcon(new ImageIcon("img/explosion_eau.png"));
+                            break;
+                        default : //Transparent pour voir l'eau
+                            cases[x][y].setIcon(null);
+                            break;
+                    }
                 }
             }
         }
