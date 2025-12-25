@@ -35,9 +35,6 @@ public class Menu extends JDialog {
 		c.insets = new Insets(20, 0, 0, 0);
 		c.gridy = 1;
 		panelB.add(bValider, c);
-		//JPanel wrapperPanel = new JPanel(new GridBagLayout());
-		//wrapperPanel.add(panelB);
-		//add(wrapperPanel, BorderLayout.CENTER);
 		add(panelB, BorderLayout.CENTER);
 	}
 

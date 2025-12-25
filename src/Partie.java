@@ -97,8 +97,8 @@ public class Partie {
 													ennemi.overlay[k][y]=ennemi.etatCases[k][y];
 												}
 											} else if ((ennemi.etatCases[x][y]/100)%10==0) {
-												for (int k=y+((ennemi.etatCases[x][y]/10)%10)-1; //retour à la ligne
-												k<=y-((ennemi.etatCases[x][y]/1000)%10)+((ennemi.etatCases[x][y]/10)%10); k++) {
+												for (int k=y-((ennemi.etatCases[x][y]/1000)%10)+((ennemi.etatCases[x][y]/10)%10); //retour à la ligne
+												k<=y+((ennemi.etatCases[x][y]/10)%10)-1; k++) {
 													ennemi.overlay[x][k]=ennemi.etatCases[x][k];
 												}
 											}
@@ -172,19 +172,13 @@ public class Partie {
 				}
 			}
 		} else if ((nCase/100)%10==0) {
-			for (int i=y+((nCase/10)%10)-1; i<=y-((nCase/1000)%10)+((nCase/10)%10); i++) {
+			for (int i=y-((nCase/1000)%10)+((nCase/10)%10); i<=y+((nCase/10)%10)-1; i++) {
 				if (joueur.etatCases[x][i]%10==0) {
 					return false;
 				}
 			}
 		}
 		return true;
-	}
-
-	public int nChiffre(int nombre, int rang) { //ne sert à rien
-		String s = Integer.toString(nombre);
-		int n = Integer.parseInt(s.substring(rang, rang+1));
-		return n;
 	}
 
 	public void finPartie() {
