@@ -6,23 +6,42 @@ public class Menu extends JDialog {
 	int bAppuye; //1 = pvp, 2 = pve, 3 = quitter
 	int dif = 0; //1 = facile, 2 = moyen, 3 = difficile
 
-	public Menu(JFrame f, String joueur) {
+	public Menu(JFrame f, Joueur joueur) {
 		super(f, null, true);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		setTitle("Bataille navale -- Choix du nom du joueur");
 		setSize(700, 400);
 		setLocationRelativeTo(f);
-		JLabel titre = new JLabel("Veuillez rentrer le nom du joueur", 0);
-		titre.setFont(new Font("Arial", Font.BOLD, 20));
-		titre.setBorder(new EmptyBorder(50, 0, 50, 0));
+		JLabel titre = new JLabel("Veuillez rentrer le nom du joueur : "+joueur.nom, 0);
+		titre.setFont(new Font("Arial", Font.BOLD, 30));
+		titre.setBorder(new EmptyBorder(50, 0, 0, 0));
 		add(titre, BorderLayout.NORTH);
-		JTextField entreeNom = new JTextField("Joueur");
-		entreeNom.setSize(100, 100);
-		JPanel panelB = new JPanel(new GridLayout(2, 1, 0, 50));
-		
+		JTextField entreeNom = new JTextField(joueur.nom);
+		entreeNom.setFont(new Font("Arial", 0, 20));
+		entreeNom.setPreferredSize(new Dimension(300, 100));
+		JButton bValider = new JButton("Valider");
+		bValider.addActionListener(e -> {
+			joueur.nom = entreeNom.getText();
+			dispose();
+		});
+		bValider.setPreferredSize(new Dimension(200, 50));
+		JPanel panelB = new JPanel(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+		c.gridx = 0;
+		c.gridy = 0;
+		c.ipady = -50;
+		panelB.add(entreeNom, c);
+		c.ipady = 0;
+		c.insets = new Insets(20, 0, 0, 0);
+		c.gridy = 1;
+		panelB.add(bValider, c);
+		//JPanel wrapperPanel = new JPanel(new GridBagLayout());
+		//wrapperPanel.add(panelB);
+		//add(wrapperPanel, BorderLayout.CENTER);
+		add(panelB, BorderLayout.CENTER);
 	}
 
 	public Menu(JFrame f, int mode) {
-		//Lignes communes aux deux constructeurs
 		super(f, null, true);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//Constructeur différent selon le mode (0 = menu principal, 1 = choix difficulté)
@@ -112,10 +131,6 @@ public class Menu extends JDialog {
 
 	public int getDif() {
 		return dif;
-	}
-
-	public String getNom(String joueur) {
-		return nom;
 	}
 
 }

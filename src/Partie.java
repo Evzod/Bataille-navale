@@ -9,11 +9,12 @@ import java.awt.*;
 public class Partie {
 	int mode; //1 = pvp, 2 = pve
 	int difficulte; //1 = facile, 2 = moyen, 3 = difficile
-	Grille grillej1;
-	Grille grillej2;
+	Grille grillej1, grillej2;
 	Joueur j1, j2;
 	JWindow window = new JWindow();
 	JFrame f;
+	JLabel nomJoueur = new JLabel();
+	int tempsChangementJoueur;
 
 	public Partie(JFrame f, int mode, int difficulte) {
 		//Paramétrage de la fenêtre
@@ -23,11 +24,20 @@ public class Partie {
 		JPanel panelj2 = new JPanel(new GridBagLayout());
 		f.add(panelj1, BorderLayout.WEST);
 		f.add(panelj2, BorderLayout.EAST);
-		//Démarrage de la partie;
+		if (mode==1) {
+			tempsChangementJoueur = 4000;
+		} else if (mode==2) {
+			tempsChangementJoueur = 1000;
+		}
+		//Démarrage de la partie
 		j1 = new Joueur(1, 0, panelj1);
 		j2 = new Joueur(mode, difficulte, panelj2);
 		j1.nom = "Joueur 1";
 		j2.nom = "Joueur 2";
+		Menu menuNom1 = new Menu(f, j1);
+		menuNom1.setVisible(true);
+		Menu menuNom2 = new Menu(f, j2);
+		menuNom2.setVisible(true);
 		initWindow();
 	}
 
@@ -50,15 +60,15 @@ public class Partie {
 
 	public void initTirs(Joueur allie, Joueur ennemi) {
 		for (int i=0; i<10; i++) {
-            for (int j=0; j<10; j++) {
+			for (int j=0; j<10; j++) {
 				ennemi.overlay[i][j] = 3;
-                final int x = i;
-                final int y = j;
-                JButton bouton = ennemi.grille.getCase(x, y);
+				final int x = i;
+				final int y = j;
+				JButton bouton = ennemi.grille.getCase(x, y);
 
-                bouton.addMouseListener(new MouseAdapter() {
-                    @Override
-                    public void mouseClicked(MouseEvent e) {
+				bouton.addMouseListener(new MouseAdapter() {
+					@Override
+					public void mouseClicked(MouseEvent e) {
 						
 						if (allie.tour == false) {
 							System.out.println("Erreur : mauvaise grille");
@@ -66,7 +76,7 @@ public class Partie {
 						}
 						allie.tour = false;
 
-                    	if (ennemi.etatCases[x][y]>1000) {
+						if (ennemi.etatCases[x][y]>1000) {
 							if (ennemi.etatCases[x][y]%10==0) {
 								System.out.println("Touché !");
 								ennemi.etatCases[x][y] += 1;
@@ -125,16 +135,16 @@ public class Partie {
 							timer2.setRepeats(false);
 							timer2.start();
 						}
-                    }
-                });
-            }
-        }
+					}
+				});
+			}
+		}
 	}
 
 	public boolean partieFinie() {
 		boolean fin = true;
 		for (int i=0; i<10; i++) {
-            for (int j=0; j<10; j++) {
+			for (int j=0; j<10; j++) {
 				if ((j1.etatCases[i][j]>1000)&&(j1.etatCases[i][j]%10==0)) {
 					fin = false;
 				}
@@ -144,7 +154,7 @@ public class Partie {
 			return fin;
 		} 
 		for (int i=0; i<10; i++) {
-            for (int j=0; j<10; j++) {
+			for (int j=0; j<10; j++) {
 				if ((j2.etatCases[i][j]>1000)&&(j2.etatCases[i][j]%10==0)) {
 					return false;
 				}
@@ -180,21 +190,21 @@ public class Partie {
 	public void finPartie() {
 		System.out.println("La partie est finie !");
 		for (int k=0; k<10; k++){
-            for (int l=0; l<10; l++){
-                JButton bouton1 = j1.grille.getCase(k, l);
-                MouseListener[] mls1 = bouton1.getMouseListeners();
-            	for (int m=0; m<mls1.length; m++) {
-                    MouseListener ml = mls1[m];
-                    bouton1.removeMouseListener(ml);
-                }
+			for (int l=0; l<10; l++){
+				JButton bouton1 = j1.grille.getCase(k, l);
+				MouseListener[] mls1 = bouton1.getMouseListeners();
+				for (int m=0; m<mls1.length; m++) {
+					MouseListener ml = mls1[m];
+					bouton1.removeMouseListener(ml);
+				}
 				JButton bouton2 = j2.grille.getCase(k, l);
-                MouseListener[] mls2 = bouton2.getMouseListeners();
+				MouseListener[] mls2 = bouton2.getMouseListeners();
 				for (int m=0; m<mls2.length; m++) {
-                    MouseListener ml = mls2[m];
-                    bouton2.removeMouseListener(ml);
-                }
-            }
-        }
+					MouseListener ml = mls2[m];
+					bouton2.removeMouseListener(ml);
+				}
+			}
+		}
 	}
 
 	public void initWindow() {
@@ -208,18 +218,19 @@ public class Partie {
 		//label.setBackground(Color.RED);
 		label.setOpaque(true);
 		window.add(label, BorderLayout.NORTH);
-	}
-
-	public void changementJoueur(Joueur joueur) {
-		JLabel nomJoueur = new JLabel(joueur.nom, 0);
+		nomJoueur = new JLabel("texte temporaire", 0);
 		nomJoueur.setPreferredSize(new Dimension(300, 200));
 		nomJoueur.setFont(new Font("Arial", Font.BOLD, 40));
 		//nomJoueur.setBackground(Color.BLUE);
 		nomJoueur.setOpaque(true);
 		window.add(nomJoueur, BorderLayout.CENTER);
+	}
+
+	public void changementJoueur(Joueur joueur) {
+		nomJoueur.setText(joueur.nom);
 		window.setVisible(true);
 		f.setVisible(false);
-		Timer timer3 = new Timer(3000, new ActionListener() {
+		Timer timer3 = new Timer(tempsChangementJoueur, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				f.setVisible(true);
