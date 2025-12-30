@@ -17,23 +17,24 @@ public class Partie {
 	int tempsChangementJoueur;
 
 	public Partie(JFrame f, int mode, int difficulte) {
-		//Paramétrage de la fenêtre
+		//Paramétrage
 		this.f = f;
 		f.setTitle("Bataille navale -- En jeu");
 		JPanel panelj1 = new JPanel(new GridBagLayout());
 		JPanel panelj2 = new JPanel(new GridBagLayout());
 		f.add(panelj1, BorderLayout.WEST);
 		f.add(panelj2, BorderLayout.EAST);
-		if (mode==1) {
-			tempsChangementJoueur = 4000;
-		} else if (mode==2) {
-			tempsChangementJoueur = 1000;
-		}
 		//Démarrage de la partie
 		j1 = new Joueur(1, 0, panelj1);
 		j2 = new Joueur(mode, difficulte, panelj2);
 		j1.nom = "Joueur 1";
-		j2.nom = "Joueur 2";
+		if (mode==1) {
+			tempsChangementJoueur = 4000;
+			j2.nom = "Joueur 2";
+		} else if (mode==2) {
+			tempsChangementJoueur = 1000;
+			j2.nom = "Ordinateur";
+		}
 		Menu menuNom1 = new Menu(f, j1);
 		menuNom1.setVisible(true);
 		Menu menuNom2 = new Menu(f, j2);
@@ -88,7 +89,7 @@ public class Partie {
 										ennemi.etatCases[x][y] += 1;
 										ennemi.overlay[x][y] += 1;
 										ennemi.grille.update(ennemi.overlay);
-										if (bateauCoule(ennemi, x, y)) {
+										if (Partie.bateauCoule(ennemi, x, y)) {
 											GameMain.pause(500);
 											System.out.println("Bateau coulé !");
 											if ((ennemi.etatCases[x][y]/100)%10==1) {
@@ -163,7 +164,7 @@ public class Partie {
 		return true;
 	}
 
-	public boolean bateauCoule(Joueur joueur, int x, int y) {
+	public static boolean bateauCoule(Joueur joueur, int x, int y) {
 		int nCase = joueur.etatCases[x][y];
 		if ((nCase/100)%10==1) {
 			for (int i=x-((nCase/10)%10)+1; i<=x+((nCase/1000)%10)-((nCase/10)%10); i++) {
@@ -214,7 +215,7 @@ public class Partie {
 		window.add(label, BorderLayout.NORTH);
 		nomJoueur = new JLabel("texte temporaire", 0);
 		nomJoueur.setPreferredSize(new Dimension(300, 200));
-		nomJoueur.setFont(new Font("Arial", Font.BOLD, 40));
+		nomJoueur.setFont(new Font("Arial", Font.BOLD, 50));
 		//nomJoueur.setBackground(Color.BLUE);
 		nomJoueur.setOpaque(true);
 		window.add(nomJoueur, BorderLayout.CENTER);

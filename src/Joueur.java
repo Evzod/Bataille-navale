@@ -91,10 +91,13 @@ public class Joueur {
 					@Override
 					public void mouseClicked(MouseEvent e) {
 						int tailleBateau = listeBateaux[indexBateau];
-						if (SwingUtilities.isRightMouseButton(e)||(!placementValide(x, y, orientation, tailleBateau))) {
+						if (SwingUtilities.isRightMouseButton(e)) {
 							orientation *= -1;
 							mouseExited(e);
 							mouseEntered(e);
+							return;
+						}
+						if (!placementValide(x, y, orientation, tailleBateau)) {
 							return;
 						}
 						for (int k=1; k<=tailleBateau; k++){
