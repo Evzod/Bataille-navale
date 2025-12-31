@@ -22,6 +22,7 @@ public class Menu extends JDialog {
 		JButton bValider = new JButton("Valider");
 		bValider.addActionListener(e -> {
 			joueur.nom = entreeNom.getText();
+			joueur.labelNom.setText(joueur.nom);
 			dispose();
 		});
 		bValider.setPreferredSize(new Dimension(200, 50));

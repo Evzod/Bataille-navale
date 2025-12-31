@@ -3,7 +3,7 @@ public class GameMain {
 	public static void main (String[] args) {
 		//Création de la fenêtre principale
 		JFrame f = new JFrame("Bataille navale");
-		f.setSize(1200, 700); //à changer
+		f.setSize(1300, 700); //à changer
 		f.setLocationRelativeTo(null);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setResizable(false);
@@ -17,9 +17,7 @@ public class GameMain {
 	public static void pause(int ms) {
 		try {
 			Thread.sleep(ms);
-		} catch(InterruptedException ex) {
-			System.out.println("faut pas faire ça");
-		}
+		} catch(InterruptedException ex) {}
 	}
 
 }

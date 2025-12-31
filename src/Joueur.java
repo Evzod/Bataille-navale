@@ -14,10 +14,11 @@ public class Joueur {
 	int mode;
 	int orientation = 1;
 	int indexBateau = 0;
-	public boolean bateauxPlaces = true;
+	public boolean bateauxPlaces = false;
 	public boolean tour = false;
 	int[][] overlay = new int[10][10];
 	Ordinateur ordi;
+	JLabel labelNom;
 
 	public Joueur (int mode, int dif, JPanel p) {
 		this.mode = mode;
@@ -34,11 +35,21 @@ public class Joueur {
 		panelGrille.setPreferredSize(new Dimension(400, 400));
 		GridBagConstraints c = new GridBagConstraints();
 		c.gridx = 0;
-		c.gridy = 200;
+		c.gridy = 1;
 		p.add(panelGrille, c);
 		grille = new Grille(panelGrille);
+		labelNom = new JLabel(nom);
+		labelNom.setFont(new Font("Arial", Font.BOLD, 35));
+		c.gridy = 0;
+		c.insets = new Insets(0, 0, 50, 0);
+		p.add(labelNom, c);
 		if (mode==2) {
 			ordi = new Ordinateur(dif, this);
+		}
+		for (int i=0; i<10; i++) {
+			for (int j=0; j<10; j++) {
+				overlay[i][j] = 3;
+			}
 		}
 	}
 
@@ -108,7 +119,7 @@ public class Joueur {
 							}
 						}
 						indexBateau += 1;
-						if (indexBateau==listeBateaux.length) {
+						if (indexBateau==listeBateaux.length) { //Fin du placement
 							for (int k=0; k<10; k++){
 								for (int l=0; l<10; l++){
 									JButton bouton = grille.getCase(k, l);
@@ -120,6 +131,9 @@ public class Joueur {
 								}
 							}
 							bateauxPlaces = true;
+						} else {
+							mouseExited(e);
+							mouseEntered(e);
 						}
 					}
 				});
