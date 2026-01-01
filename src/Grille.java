@@ -6,7 +6,7 @@ public class Grille {
     
     public Grille(JPanel p) {
         p.setLayout(new GridLayout(10,10));
-        for (int x = 0; x <= 9; x++) {//L'origine est dans le case en haut à gauche,
+        for (int x = 0; x <= 9; x++) {//L'origine est dans la case en haut à gauche,
             for (int y = 0; y <= 9; y++) {//x vers le bas, y vers la droite
                 JButton b = new JButton();
                 b.setRolloverEnabled(false);

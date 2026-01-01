@@ -12,6 +12,7 @@ public class Joueur {
 	int[][] placement = new int[10][10];
 	Random rand = new Random();
 	int mode;
+	int dif;
 	int orientation = 1;
 	int indexBateau = 0;
 	public boolean bateauxPlaces = false;
@@ -22,6 +23,7 @@ public class Joueur {
 
 	public Joueur (int mode, int dif, JPanel p) {
 		this.mode = mode;
+		this.dif = dif;
 		p.setPreferredSize(new Dimension(450, 600));
 		p.setBackground(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
 		Image imageFond = new ImageIcon("img/eau.gif").getImage();//png ou gif, les deux existent
@@ -43,9 +45,6 @@ public class Joueur {
 		c.gridy = 0;
 		c.insets = new Insets(0, 0, 50, 0);
 		p.add(labelNom, c);
-		if (mode==2) {
-			ordi = new Ordinateur(dif, this);
-		}
 		for (int i=0; i<10; i++) {
 			for (int j=0; j<10; j++) {
 				overlay[i][j] = 3;
@@ -82,7 +81,7 @@ public class Joueur {
 									if (orientation==1){
 										placement[x+k-1][y] = -1;
 									} else if (orientation==-1) {
-									placement[x][y-k+1] = -1;
+										placement[x][y-k+1] = -1;
 									}
 								} catch (Exception e2) {};
 							}
@@ -140,7 +139,7 @@ public class Joueur {
 			}
 		}
 		if (mode==2) {
-			ordi.placerBateaux();
+			ordi.placementBateaux();
 		} 
 	}
 
@@ -192,5 +191,9 @@ public class Joueur {
 			}
 		}
 		grille.update(transfert);
+	}
+
+	public void creerOrdi(Joueur ennemi) {
+		ordi = new Ordinateur(dif, this, ennemi);
 	}
 }

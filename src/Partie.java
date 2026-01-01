@@ -56,6 +56,7 @@ public class Partie {
 		} else if (mode==2) {
 			tempsChangementJoueur = 1000;
 			j2.nom = "Ordinateur";
+			j2.creerOrdi(j1);
 		}
 		Menu menuNom1 = new Menu(f, j1);
 		menuNom1.setVisible(true);
@@ -90,10 +91,8 @@ public class Partie {
 			changementJoueur(j2);
 			labelEtape.setText("<html><div style='text-align: center'>Placement&nbsp;des<br>bateaux</div></html>");
 			j2.grille.update(j2.etatCases);
-			j2.placerBateaux();
-		} else if (mode==2) {
-			j2.ordi.placerBateaux();
 		}
+		j2.placerBateaux();
 		Timer timer = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
@@ -167,6 +166,7 @@ public class Partie {
 
 							if (!partieFinie()) {
 								allie.tour = true;
+								//sdrfgygydfgyhiuhgtfdfgyhiuhytfhguy
 							} else {
 								finPartie();
 							}
@@ -180,9 +180,11 @@ public class Partie {
 									ennemi.overlay[x][y] = ennemi.etatCases[x][y];
 									ennemi.grille.update(ennemi.overlay);
 									allie.grille.update(allie.overlay);
-									changementJoueur(ennemi);
-									ennemi.grille.update(ennemi.etatCases);
 									ennemi.tour = true;
+									changementJoueur(ennemi);
+									if ((mode!=2)||(ennemi==j1)) {
+										ennemi.grille.update(ennemi.etatCases);
+									}
 								}
 							});
 							timer2.setRepeats(false);
@@ -312,15 +314,26 @@ public class Partie {
 		nomJoueur.setText(joueur.nom);
 		window.setVisible(true);
 		f.setVisible(false);
-		Timer timer3 = new Timer(tempsChangementJoueur, new ActionListener() {
+		Timer timer1 = new Timer(tempsChangementJoueur, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				f.setVisible(true);
 				window.setVisible(false);
 			}
 		});
-		timer3.setRepeats(false);
-		timer3.start();		
+		timer1.setRepeats(false);
+		timer1.start();
+		if (j2.tour) {
+			Timer timer2 = new Timer(tempsChangementJoueur+1500, new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent evt) {
+					j2.ordi.tir();
+				}
+			});
+			timer2.setRepeats(false);
+			timer2.start();	
+		}
+		
 	}
 
 	public void quitterJeu() {
