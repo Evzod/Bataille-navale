@@ -20,7 +20,6 @@ public class Partie {
 	Joueur gagnant;
 
 	public Partie(JFrame f, int mode, int difficulte) {
-		//Paramétrage
 		this.f = f;
 		this.mode = mode;
 		f.setTitle("Bataille navale -- En jeu");
@@ -46,7 +45,6 @@ public class Partie {
 		c.insets = new Insets(0, 20, 100, 20);
 		panelMilieu.add(labelNomJoueur, c);
 		f.add(panelMilieu, BorderLayout.CENTER);
-		//Démarrage de la partie
 		j1 = new Joueur(1, 0, panelj1);
 		j2 = new Joueur(mode, difficulte, panelj2);
 		j1.nom = "Joueur 1";
@@ -81,7 +79,7 @@ public class Partie {
 
 	public void placement1() {
 		labelNomJoueur.setText(j1.nom);
-		j2.grille.update(j2.overlay); //Pour pouvoir voir la grille adverse au placement ia
+		j2.grille.update(j2.overlay);
 		j1.placerBateaux();
 	}
 
@@ -91,12 +89,17 @@ public class Partie {
 			changementJoueur(j2);
 			labelEtape.setText("<html><div style='text-align: center'>Placement&nbsp;des<br>bateaux</div></html>");
 			j2.grille.update(j2.etatCases);
+		} else {
+			f.setVisible(false);
 		}
 		j2.placerBateaux();
 		Timer timer = new Timer(1000, new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent evt) {
 				if (j2.bateauxPlaces) {
+					if (mode==2) {
+						f.setVisible(true);
+					}
 					lancerJeu();
 					((Timer)evt.getSource()).stop();
 				}
@@ -166,7 +169,6 @@ public class Partie {
 
 							if (!partieFinie()) {
 								allie.tour = true;
-								//sdrfgygydfgyhiuhgtfdfgyhiuhytfhguy
 							} else {
 								finPartie();
 							}
@@ -297,13 +299,11 @@ public class Partie {
 		JLabel label = new JLabel("Changement de joueur, au tour de :", 0);
 		label.setPreferredSize(new Dimension(300, 200));
 		label.setFont(new Font("Arial", Font.BOLD, 50));
-		//label.setBackground(Color.RED);
 		label.setOpaque(true);
 		window.add(label, BorderLayout.NORTH);
 		nomJoueur = new JLabel("texte temporaire", 0);
 		nomJoueur.setPreferredSize(new Dimension(300, 200));
 		nomJoueur.setFont(new Font("Arial", Font.BOLD, 50));
-		//nomJoueur.setBackground(Color.BLUE);
 		nomJoueur.setOpaque(true);
 		window.add(nomJoueur, BorderLayout.CENTER);
 	}

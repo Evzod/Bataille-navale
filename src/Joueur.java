@@ -6,17 +6,17 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Joueur {
-	public Grille grille;
-	public String nom;
-	public int[][] etatCases = new int[10][10];
+	Grille grille;
+	String nom;
+	int[][] etatCases = new int[10][10];
 	int[][] placement = new int[10][10];
 	Random rand = new Random();
 	int mode;
 	int dif;
 	int orientation = 1;
 	int indexBateau = 0;
-	public boolean bateauxPlaces = false;
-	public boolean tour = false;
+	boolean bateauxPlaces = false;
+	boolean tour = false;
 	int[][] overlay = new int[10][10];
 	Ordinateur ordi;
 	JLabel labelNom;
@@ -26,12 +26,12 @@ public class Joueur {
 		this.dif = dif;
 		p.setPreferredSize(new Dimension(450, 600));
 		p.setBackground(new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256)));
-		Image imageFond = new ImageIcon("img/eau.gif").getImage();//png ou gif, les deux existent
-		JPanel panelGrille = new JPanel() { //Création d'un JPanel particulier
-			@Override //Redéfinis une méthode existante de JPanel
-			protected void paintComponent(Graphics g) { // La méthode en question
-				super.paintComponent(g); //Pour bien effacer les anciennes icones
-				g.drawImage(imageFond, 0, 0, 400, 400, this); //Dessine l'image dans le panel
+		Image imageFond = new ImageIcon("img/eau.gif").getImage();
+		JPanel panelGrille = new JPanel() { 
+			@Override 
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				g.drawImage(imageFond, 0, 0, 400, 400, this);
 			}
 		};
 		panelGrille.setPreferredSize(new Dimension(400, 400));
@@ -52,9 +52,8 @@ public class Joueur {
 		}
 	}
 
-
 	public void placerBateaux() {
-		int[] listeBateaux = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1};
+		int[] listeBateaux = {4, 3, 3, 2, 2, 2, 1, 1, 1, 1}; //Modifier les bateaux ici
 		bateauxPlaces = false;
 		for (int i=0; i<10; i++){
 			for (int j=0; j<10; j++) {

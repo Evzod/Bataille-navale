@@ -1,9 +1,9 @@
 import javax.swing.*;
+
 public class GameMain {
 	public static void main (String[] args) {
-		//Création de la fenêtre principale
 		JFrame f = new JFrame("Bataille navale");
-		f.setSize(1300, 750); //à changer
+		f.setSize(1300, 750);
 		f.setLocationRelativeTo(null);
 		f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		f.setResizable(false);

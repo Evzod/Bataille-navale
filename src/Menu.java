@@ -44,23 +44,19 @@ public class Menu extends JDialog {
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		//Constructeur différent selon le mode (0 = menu principal, 1 = choix difficulté)
 		if (mode==0) {
-			//Actions sur la fenêtre
 			setTitle("Bataille navale -- Menu Principal");
 			setSize(1000, 600);
 			setLocationRelativeTo(f);
-			//Création des boutons
 			JPanel panelB = new JPanel();
 			JPanel panel = new JPanel();
 			JButton b1 = new JButton ("Joueur vs Joueur");
 			JButton b2 = new JButton ("Joueur vs Ordinateur");
 			JButton b3 = new JButton ("Quitter");
-			//Disposition des boutons
 			panelB.setLayout(new GridLayout(3,1, 0, 50));
 			panelB.add(b1);
 			panelB.add(b2);
 			panelB.add(b3);
 			panel.add(panelB);
-			//Ajout des actions aux boutons
 			b1.addActionListener(e -> {
 				bAppuye = 1;
 				dispose();
@@ -71,37 +67,31 @@ public class Menu extends JDialog {
 				dispose();
 			});
 			b2.addActionListener(e -> {
-				//Ouvre le menu de choix de difficulté
-				Menu menuDif = new Menu(f, 1);
+				Menu menuDif = new Menu(f, 1); //Ouvre le menu de choix de difficulté
 				menuDif.setVisible(true);
 				bAppuye = 2;
-				dif = menuDif.getbAppuye(); //1 = facile, 2 = moyen, 3 = difficile
+				dif = menuDif.getbAppuye();
 				dispose();
 			});
-			//Création du titre et mise en forme
 			JLabel titre = new JLabel("Bataille Navale", 0);
 			titre.setFont(new Font("Arial", Font.BOLD, 30));
 			titre.setBorder(new EmptyBorder(100, 0, 100, 0));
 			add(titre, BorderLayout.NORTH);
 			add(panel, BorderLayout.CENTER);
-		} else if (mode==1) {//Sous-menu choix difficulté
-			//Actions sur la fenêtre
+		} else if (mode==1) {
 			setTitle("Bataille navale -- Choix de la Difficulté");
 			setSize(700, 400);
 			setLocationRelativeTo(f);
-			//Création des boutons
 			JPanel panelB = new JPanel();
 			JPanel panel = new JPanel();
 			JButton b1 = new JButton ("Facile");
 			JButton b2 = new JButton ("Moyen");
 			JButton b3 = new JButton ("Difficile");
-			//Disposition des boutons
 			panelB.setLayout(new GridLayout(3,1, 0, 20));
 			panelB.add(b1);
 			panelB.add(b2);
 			panelB.add(b3);
 			panel.add(panelB);
-			//Ajout des actions aux boutons
 			b1.addActionListener(e -> {
 				bAppuye = 1;
 				dispose();
@@ -114,7 +104,6 @@ public class Menu extends JDialog {
 				bAppuye = 3;
 				dispose();
 			});
-			//Création du titre et mise en forme
 			JLabel titre = new JLabel("Choix de la difficulté", 0);
 			titre.setFont(new Font("Arial", Font.BOLD, 20));
 			titre.setBorder(new EmptyBorder(50, 0, 50, 0));
